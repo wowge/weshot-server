@@ -8,6 +8,7 @@ qiniu.conf.ACCESS_KEY = process.env.qiniu_AK;
 qiniu.conf.SECRET_KEY = process.env.qiniu_SK;
 
 const https = require('https');
+const http = require('http');
 const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -54,6 +55,6 @@ process.on('uncaughtException', error => {
 });
 
 // 启动server
-https.createServer(options, app).listen(config.port, () => {
-    console.log('Express server listening on port: %s', config.port);
+https.createServer(options, app).listen(443, () => {
+    console.log('Express server listening on port: %s', '443');
 });
