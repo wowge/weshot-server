@@ -19,11 +19,6 @@ const cors = require('cors');
 
 const app = express();
 
-var options = {
-    key: fs.readFileSync('./2_weshot.wowge.org.key'),
-    cert: fs.readFileSync('./1_weshot.wowge.org_bundle.crt'),
-};
-
 app.set('query parser', 'simple');
 app.set('case sensitive routing', true);
 app.set('jsonp callback name', 'callback');
@@ -55,6 +50,6 @@ process.on('uncaughtException', error => {
 });
 
 // 启动server
-https.createServer(options, app).listen(443, () => {
-    console.log('Express server listening on port: %s', '443');
+http.createServer(app).listen(80, () => {
+    console.log('Express server listening on port: 80');
 });
