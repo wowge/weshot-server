@@ -1,0 +1,14 @@
+{
+    "name": "weapp-weshot",
+    "script": "app.js",
+    "cwd": "./",
+    "exec_mode": "fork",
+    "watch": true,
+    "env": {
+        "NODE_ENV": "production",
+        "DEBUG_SDK": "yes",
+        "qiniu_AK": "YoeXKqJ9frWun3Nep7K8-i70AYutG2ZBtnDM-2hi",
+        "qiniu_SK": "OwHpSY2QDuLgRDK16NOgM7Hh4fSJXxAeU3C9V976",
+        "MONGOLAB_URI": "mongodb://root:BBBBBBHcde0R1z@localhost:27017/weapp"
+    }
+}
