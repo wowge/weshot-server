@@ -7,7 +7,8 @@ const qiniu = require('qiniu');
 qiniu.conf.ACCESS_KEY = process.env.qiniu_AK;
 qiniu.conf.SECRET_KEY = process.env.qiniu_SK;
 
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -16,6 +17,11 @@ const compression = require('compression');
 const cors = require('cors');
 
 const app = express();
+
+var options = {
+    key: fs.readFileSync('./2_weshot.wowge.org.key'),
+    cert: fs.readFileSync('./1_weshot.wowge.org_bundle.crt'),
+};
 
 app.set('query parser', 'simple');
 app.set('case sensitive routing', true);
@@ -48,6 +54,6 @@ process.on('uncaughtException', error => {
 });
 
 // 启动server
-http.createServer(app).listen(config.port, () => {
+https.createServer(options, app).listen(config.port, () => {
     console.log('Express server listening on port: %s', config.port);
 });
