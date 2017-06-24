@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var Album = mongoose.model('Album');
 var User = mongoose.model('User');
 const LoginService = require('qcloud-weapp-server-sdk').LoginService;
+const qiniu = require('qiniu');
 
 /**
  * Insert, delete or get photos' info and reviews.
@@ -212,38 +213,55 @@ module.exports.albumDelete = function (req, res) {
         .then(data => {
             if (req.body && req.body.id){
                 Album
-                    .findByIdAndRemove(req.body.id)
+                    .findById(req.body.id)
                     .exec(function (err, album) {
                         if (err){
                             res.status(400);
                             res.json(err);
                         }else {
-                            User
-                                .findById(data.userInfo.openId)
-                                .exec(function (err, user) {
-                                    if (err){
+                            for (let i = 0, len = album.photos.length; i < len; i++){
+                                //构建bucketmanager对象
+                                let client = new qiniu.rs.Client();
+                                //你要测试的空间， 并且这个key在你空间中存在
+                                bucket = 'wowge';
+                                key = album.photos[i];
+                                //删除资源
+                                client.remove(bucket, key, function(err, ret) {
+                                    if (!err) {
+                                        if (i == len - 1){
+                                            User
+                                                .findById(data.userInfo.openId)
+                                                .exec(function (err, user) {
+                                                    if (err){
+                                                        res.status(400);
+                                                        res.json(err);
+                                                        return;
+                                                    }
+                                                    user.nickName = data.userInfo.nickName;
+                                                    user.avatarUrl = data.userInfo.avatarUrl;
+                                                    for (let i = 0, len = user.albums.length; i < len; i++){
+                                                        if (user.albums[i].equals(req.body.id)){
+                                                            user.albums.splice(i, 1);
+                                                            break;
+                                                        }
+                                                    }
+                                                    user.save(function (err, usr) {
+                                                        if (err){
+                                                            res.status(400);
+                                                            res.json(err);
+                                                        }else {
+                                                            res.status(204);
+                                                            res.json(null);
+                                                        }
+                                                    });
+                                                });
+                                        }
+                                    } else {
                                         res.status(400);
-                                        res.json(err);
-                                        return;
+                                        res.json('qiniu remove error!');
                                     }
-                                    user.nickName = data.userInfo.nickName;
-                                    user.avatarUrl = data.userInfo.avatarUrl;
-                                    for (let i = 0, len = user.albums.length; i < len; i++){
-                                        if (user.albums[i].equals(req.body.id)){
-                                            user.albums.splice(i, 1);
-                                            break;
-                                        }
-                                    }
-                                    user.save(function (err, usr) {
-                                        if (err){
-                                            res.status(400);
-                                            res.json(err);
-                                        }else {
-                                            res.status(204);
-                                            res.json(null);
-                                        }
-                                    });
                                 });
+                            }
                         }
                     });
             }else {
