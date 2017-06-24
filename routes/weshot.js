@@ -228,8 +228,8 @@ module.exports.albumDelete = function (req, res) {
                                         return;
                                     }
                                     for (let i = 0, len = user.albums.length; i < len; i++){
-                                        if (user.albums[i].equals(album._id)){
-                                            user.history.splice(i, 1);
+                                        if (user.albums[i].equals(req.body.id)){
+                                            user.albums.splice(i, 1);
                                             break;
                                         }
                                     }
