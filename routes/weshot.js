@@ -227,7 +227,12 @@ module.exports.albumDelete = function (req, res) {
                                         res.json(err);
                                         return;
                                     }
-                                    user.albums.id(req.body.id).remove();
+                                    for (let i = 0, len = user.albums.length; i < len; i++){
+                                        if (user.albums[i].equals(album._id)){
+                                            user.history.splice(i, 1);
+                                            break;
+                                        }
+                                    }
                                     user.save(function (err, usr) {
                                         if (err){
                                             res.status(400);
