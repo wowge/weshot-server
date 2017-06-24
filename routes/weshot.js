@@ -210,10 +210,9 @@ module.exports.albumDelete = function (req, res) {
     loginService
         .check()
         .then(data => {
-            console.log(req.body);
             if (req.body && req.body.id){
                 Album
-                    .findByIdAndRemove(req.query.id)
+                    .findByIdAndRemove(req.body.id)
                     .exec(function (err, album) {
                         if (err){
                             res.status(400);
@@ -228,7 +227,7 @@ module.exports.albumDelete = function (req, res) {
                                         res.json(err);
                                         return;
                                     }
-                                    user.albums.id(req.query.id).remove();
+                                    user.albums.id(req.body.id).remove();
                                     user.save(function (err, usr) {
                                         if (err){
                                             res.status(400);
