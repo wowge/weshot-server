@@ -50,6 +50,6 @@ process.on('uncaughtException', error => {
 });
 
 // 启动server
-http.createServer(app).listen(80, () => {
-    console.log('Express server listening on port: 80');
+http.createServer(app).listen(config.port, () => {
+    console.log('Express server listening on port: ', config.port);
 });

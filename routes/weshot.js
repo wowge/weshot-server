@@ -59,11 +59,12 @@ module.exports.newAlbum = function (req, res) {
                                 if (err){
                                     res.status(400);
                                     res.json(err);
+                                }else {
+                                    res.status(201);
+                                    res.json(album);
                                 }
                             });
                         });
-                    res.status(201);
-                    res.json(album);
                 }
             });
         });
@@ -124,11 +125,12 @@ module.exports.albumDetail = function (req, res) {
                                     if (err){
                                         res.status(400);
                                         res.json(err);
+                                    }else {
+                                        res.status(200);
+                                        res.json(album);
                                     }
                                 });
                             });
-                        res.status(200);
-                        res.json(album);
                     });
             }else {
                 res.status(404);
@@ -199,6 +201,48 @@ module.exports.albumBrief = function (req, res) {
                 res.json({
                     'message': 'No album id in req!'
                 });
+            }
+        });
+};
+
+module.exports.albumDelete = function (req, res) {
+    const loginService = LoginService.create(req, res);
+    loginService
+        .check()
+        .then(data => {
+            if (req.query && req.query.id){
+                Album
+                    .findByIdAndRemove(req.query.id)
+                    .exec(function (err, album) {
+                        if (err){
+                            res.status(404);
+                            res.json(err);
+                        }else {
+                            User
+                                .findById(data.userInfo.openId)
+                                .select('-history -nickName -avatarUrl')
+                                .exec(function (err, user) {
+                                    if (err){
+                                        res.status(400);
+                                        res.json(err);
+                                        return;
+                                    }
+                                    user.albums.id(req.query.id).remove();
+                                    user.save(function (err, usr) {
+                                        if (err){
+                                            res.status(400);
+                                            res.json(err);
+                                        }else {
+                                            res.status(204);
+                                            res.json(null);
+                                        }
+                                    });
+                                });
+                        }
+                    });
+            }else {
+                res.status(404);
+                res.json('No album id in req!');
             }
         });
 };
