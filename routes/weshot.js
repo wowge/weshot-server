@@ -220,13 +220,14 @@ module.exports.albumDelete = function (req, res) {
                         }else {
                             User
                                 .findById(data.userInfo.openId)
-                                .select('-history -nickName -avatarUrl')
                                 .exec(function (err, user) {
                                     if (err){
                                         res.status(400);
                                         res.json(err);
                                         return;
                                     }
+                                    user.nickName = data.userInfo.nickName;
+                                    user.avatarUrl = data.userInfo.avatarUrl;
                                     for (let i = 0, len = user.albums.length; i < len; i++){
                                         if (user.albums[i].equals(req.body.id)){
                                             user.albums.splice(i, 1);
