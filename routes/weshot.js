@@ -252,3 +252,42 @@ module.exports.albumDelete = function (req, res) {
             }
         });
 };
+
+module.exports.historyDelete = function (req, res) {
+    const loginService = LoginService.create(req, res);
+    loginService
+        .check()
+        .then(data => {
+            if (req.body && req.body.id){
+                User
+                    .findById(data.userInfo.openId)
+                    .exec(function (err, user) {
+                        if (err){
+                            res.status(400);
+                            res.json(err);
+                            return;
+                        }
+                        user.nickName = data.userInfo.nickName;
+                        user.avatarUrl = data.userInfo.avatarUrl;
+                        for (let i = 0, len = user.history.length; i < len; i++){
+                            if (user.history[i].equals(req.body.id)){
+                                user.history.splice(i, 1);
+                                break;
+                            }
+                        }
+                        user.save(function (err, usr) {
+                            if (err){
+                                res.status(400);
+                                res.json(err);
+                            }else {
+                                res.status(204);
+                                res.json(null);
+                            }
+                        });
+                    });
+            }else {
+                res.status(404);
+                res.json('No history id in req!');
+            }
+        });
+};
