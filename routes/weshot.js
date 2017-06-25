@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var Album = mongoose.model('Album');
 var User = mongoose.model('User');
+var Playlist = mongoose.model('Playlist');
 const LoginService = require('qcloud-weapp-server-sdk').LoginService;
 const qiniu = require('qiniu');
 
@@ -316,5 +317,24 @@ module.exports.historyDelete = function (req, res) {
                 res.status(404);
                 res.json('No history id in req!');
             }
+        });
+};
+
+module.exports.playlistRecommend = function (req, res) {
+    const loginService = LoginService.create(req, res);
+    loginService
+        .check()
+        .then(data => {
+            Playlist
+                .findOne({name: '推荐歌单'})
+                .exec(function (err, playlist) {
+                    if (err){
+                        res.status(404);
+                        res.json(err);
+                    }else {
+                        res.status(200);
+                        res.json(playlist);
+                    }
+                })
         });
 };
