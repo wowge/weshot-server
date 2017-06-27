@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 var Album = mongoose.model('Album');
 var User = mongoose.model('User');
+var Playlist = mongoose.model('Playlist');
 
 const LoginService = require('qcloud-weapp-server-sdk').LoginService;
 const qiniu = require('qiniu');
@@ -317,5 +318,30 @@ module.exports.historyDelete = function (req, res) {
                 res.status(404);
                 res.json('No history id in req!');
             }
+        });
+};
+
+module.exports.playlist = function (req, res) {
+    const loginService = LoginService.create(req, res);
+    loginService
+        .check()
+        .then(data => {
+            Playlist
+                .find({openId: 'opQ7t0GBcFT69smTUJDj4rAyEX1M'})
+                .exec(function (err, lists) {
+                    if (!lists){
+                        res.status(404);
+                        res.json({
+                            'message': 'No lists found!'
+                        });
+                        return;
+                    }else if (err){
+                        res.status(404);
+                        res.json(err);
+                        return;
+                    }
+                    res.status(200);
+                    res.json(lists);
+                });
         });
 };
