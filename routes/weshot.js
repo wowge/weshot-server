@@ -327,9 +327,9 @@ module.exports.playlist = function (req, res) {
         .check()
         .then(data => {
             Playlist
-                .find({openId: 'opQ7t0GBcFT69smTUJDj4rAyEX1M'})
-                .exec(function (err, list) {
-                    if (!list){
+                .find({catagory: '推荐歌单'})
+                .exec(function (err, playlist) {
+                    if (!playlist){
                         res.status(404);
                         res.json({
                             'message': 'No playlist found!'
@@ -341,7 +341,7 @@ module.exports.playlist = function (req, res) {
                         return;
                     }
                     res.status(200);
-                    res.json(list);
+                    res.json(playlist);
                 });
         });
 };

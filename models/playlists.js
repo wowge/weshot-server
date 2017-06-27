@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var playlistSchema = new Schema({
-    openId: String,
+    catagory: String,
     lists: [{
         name: String,
         id: String
