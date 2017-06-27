@@ -341,7 +341,7 @@ module.exports.playlist = function (req, res) {
                         return;
                     }
                     res.status(200);
-                    res.json(list.lists);
+                    res.json(JSON.parse(list.lists));
                 });
         });
 };
