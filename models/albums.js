@@ -19,7 +19,7 @@ var albumSchema = new Schema({
         poster: {type: String},
         name: {type: String},
         authors: {type: String},
-        src: {type: String},
+        id: {type: String},
     },
     createOn: {type: Date},
     userInfo: {
