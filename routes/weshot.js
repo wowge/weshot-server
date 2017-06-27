@@ -329,10 +329,10 @@ module.exports.playlist = function (req, res) {
             Playlist
                 .find({openId: 'opQ7t0GBcFT69smTUJDj4rAyEX1M'})
                 .exec(function (err, list) {
-                    if (!lists){
+                    if (!list){
                         res.status(404);
                         res.json({
-                            'message': 'No lists found!'
+                            'message': 'No playlist found!'
                         });
                         return;
                     }else if (err){
