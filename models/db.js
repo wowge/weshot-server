@@ -39,4 +39,3 @@ process.on('SIGTERM',function () {
 
 require('./albums');
 require('./users');
-require('./playlists');
