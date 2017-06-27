@@ -328,7 +328,7 @@ module.exports.playlist = function (req, res) {
         .then(data => {
             Playlist
                 .find({openId: 'opQ7t0GBcFT69smTUJDj4rAyEX1M'})
-                .exec(function (err, lists) {
+                .exec(function (err, list) {
                     if (!lists){
                         res.status(404);
                         res.json({
@@ -341,7 +341,7 @@ module.exports.playlist = function (req, res) {
                         return;
                     }
                     res.status(200);
-                    res.json(lists);
+                    res.json(list.lists);
                 });
         });
 };
