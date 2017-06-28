@@ -345,3 +345,28 @@ module.exports.playlist = function (req, res) {
                 });
         });
 };
+
+module.exports.faq = function (req, res) {
+    const loginService = LoginService.create(req, res);
+    loginService
+        .check()
+        .then(data => {
+            Playlist
+                .find({catagory: '常见问题'})
+                .exec(function (err, playlist) {
+                    if (!playlist){
+                        res.status(404);
+                        res.json({
+                            'message': 'No faq found!'
+                        });
+                        return;
+                    }else if (err){
+                        res.status(404);
+                        res.json(err);
+                        return;
+                    }
+                    res.status(200);
+                    res.json(playlist);
+                });
+        });
+};

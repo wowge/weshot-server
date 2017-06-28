@@ -17,6 +17,7 @@ router.get('/usr', weshot.usr);
 router.delete('/album', weshot.albumDelete);
 router.delete('/history', weshot.historyDelete);
 router.get('/playlist', weshot.playlist);
+router.get('/faq', weshot.faq);
 
 /**
  * Music-api
