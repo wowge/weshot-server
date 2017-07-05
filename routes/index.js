@@ -6,6 +6,8 @@ const MusicApi = require('music-api');
 const qiniu = require('qiniu');
 const weshot = require('./weshot');
 
+var qiniuUrl = process.env.qiniu_weshot_url;
+
 router.get('/', require('./welcome'));
 router.get('/login', require('./login'));
 router.get('/user', require('./user'));
@@ -88,7 +90,7 @@ router.get('/api/uptoken', (req, res) => {
 
 router.get('/api/downloadUrl', (req, res) => {
     var key = req.query.key;
-    var url = 'https://orf9v7q1t.bkt.clouddn.com/' + key;
+    var url = qiniuUrl + key;
     var policy = new qiniu.rs.GetPolicy();
     var downloadUrl = policy.makeRequest(url);
     res.json({
