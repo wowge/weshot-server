@@ -9,7 +9,6 @@
         "DEBUG_SDK": "yes",
         "qiniu_AK": "YoeXKqJ9frWun3Nep7K8-i70AYutG2ZBtnDM-2hi",
         "qiniu_SK": "OwHpSY2QDuLgRDK16NOgM7Hh4fSJXxAeU3C9V976",
-        "MONGOLAB_URI": "mongodb://admin:BBBBBBHcde0R1z@localhost:27017/weapp",
-        "qiniu_weshot_url": "https://orf9v7q1t.bkt.clouddn.com/"
+        "MONGOLAB_URI": "mongodb://admin:BBBBBBHcde0R1z@localhost:27017/weapp"
     }
 }
