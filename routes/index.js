@@ -5,7 +5,7 @@ const router = express.Router();
 const MusicApi = require('music-api');
 const qiniu = require('qiniu');
 const weshot = require('./weshot');
-const config = require('./config');
+const config = require('../config');
 
 router.get('/', require('./welcome'));
 router.get('/login', require('./login'));
