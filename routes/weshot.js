@@ -225,7 +225,7 @@ module.exports.albumDelete = function (req, res) {
                                 //构建bucketmanager对象
                                 let client = new qiniu.rs.Client();
                                 //你要测试的空间， 并且这个key在你空间中存在
-                                let bucket = 'wowge';
+                                let bucket = 'weshotprivate';
                                 let key = album.photos[i];
                                 //删除资源
                                 client.remove(bucket, key, function(err, ret) {
