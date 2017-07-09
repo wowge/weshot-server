@@ -79,7 +79,7 @@ router.get('/api/suggest/album/:vendor', (req, res) => {
  */
 
 router.get('/api/uptoken', (req, res) => {
-    var bucket = 'wowge';
+    var bucket = 'weshotprivate';
     var putPolicy = new qiniu.rs.PutPolicy(bucket);
     var uptoken = putPolicy.token();
     res.json({
