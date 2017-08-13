@@ -24,8 +24,6 @@ var albumSchema = new Schema({
     createOn: {type: Date},
     userInfo: {
         open_id: String,
-        nickName: String,
-        avatarUrl: String,
     },
     reviews: [reviewSchema],
 });

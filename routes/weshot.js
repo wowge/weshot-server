@@ -18,8 +18,6 @@ module.exports.newAlbum = function (req, res) {
         .then(data => {
             var userInfo = {
                 open_id: data.userInfo.openId,
-                nickName: data.userInfo.nickName,
-                avatarUrl: data.userInfo.avatarUrl,
             };
             Album.create({
                 albumName: req.body.albumName,
@@ -39,9 +37,9 @@ module.exports.newAlbum = function (req, res) {
                         .exec(function (err, user) {
                             if (!user){
                                 User.create({
-                                    _id: album.userInfo.open_id,
-                                    nickName: album.userInfo.nickName,
-                                    avatarUrl: album.userInfo.avatarUrl,
+                                    _id: data.userInfo.openId,
+                                    nickName: data.userInfo.nickName,
+                                    avatarUrl: data.userInfo.avatarUrl,
                                     albums: [album._id],
                                 }, function (err, user) {
                                     if(err){
@@ -55,8 +53,8 @@ module.exports.newAlbum = function (req, res) {
                                 res.json(err);
                                 return;
                             }
-                            user.nickName = album.userInfo.nickName;
-                            user.avatarUrl = album.userInfo.avatarUrl;
+                            user.nickName = data.userInfo.nickName;
+                            user.avatarUrl = data.userInfo.avatarUrl;
                             user.albums.unshift(album._id);
                             user.save(function (err, usr) {
                                 if (err){
