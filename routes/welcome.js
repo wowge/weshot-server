@@ -43,16 +43,7 @@ const html =
 </head>
 <body>
     <div id="container">
-        <h1>葛超的个人作品集</h1>
-        <p>会话管理服务</p>
-        <ul>
-            <li><a href="/login">登录服务</a></li>
-            <li><a href="/user">检查登录</a></li>
-        </ul>
-        <p>信道服务</p>
-        <ul>
-            <li><a href="/tunnel">获得信道地址</a></li>
-        </ul>
+        
     </div>
 </body>
 </html>
