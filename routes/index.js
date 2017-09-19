@@ -6,7 +6,12 @@ const MusicApi = require('music-api');
 const qiniu = require('qiniu');
 const weshot = require('./weshot');
 const config = require('../config');
-const vue = require('./vue')
+const vue = require('./vue');
+var expressJwt = require('express-jwt');
+var auth = expressJwt({
+  secret: process.env.JWT_SECRET,
+  userProperty: 'payload'
+});
 
 router.get('/', require('./welcome'));
 router.get('/login', require('./login'));
@@ -23,7 +28,7 @@ router.get('/playlist', weshot.playlist);
 
 // vue edition
 router.post('/vue/login', vue.login);
-router.get('/vue/album', vue.album);
+router.get('/vue/album', auth, vue.album);
 /**
  * Music-api
  */

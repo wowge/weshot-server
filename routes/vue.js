@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var Album = mongoose.model('Album');
 var User = mongoose.model('User');
-var passport = require('passport')
+var passport = require('passport');
 
 module.exports.album = function (req, res) {
   if (req.query && req.query.id){
