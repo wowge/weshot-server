@@ -22,7 +22,7 @@ router.delete('/history', weshot.historyDelete);
 router.get('/playlist', weshot.playlist);
 
 // vue edition
-router.post('/vue/login', vue)
+router.post('/vue/login', vue.login);
 /**
  * Music-api
  */
