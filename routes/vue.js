@@ -57,5 +57,5 @@ module.exports.login = function (req, res) {
       res.status(401);
       res.json(info)
     }
-  })
+  })(req, res);
 }

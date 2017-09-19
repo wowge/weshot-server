@@ -19,7 +19,7 @@ userSchema.methods.generateJwt = function () {
   expiry.setDate(expiry.getDate() + 7)
   return jwt.sign({
     _id: this._id,
-    expiry: parseInt(expiry.getTime()/1000)
+    exp: parseInt(expiry.getTime()/1000)
   }, process.env.JWT_SECRET)
 }
 
