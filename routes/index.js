@@ -6,11 +6,13 @@ const MusicApi = require('music-api');
 const qiniu = require('qiniu');
 const weshot = require('./weshot');
 const config = require('../config');
+const vue = require('./vue')
 
 router.get('/', require('./welcome'));
 router.get('/login', require('./login'));
 router.get('/user', require('./user'));
 
+// mini program edition
 router.post('/album/new', weshot.newAlbum);
 router.get('/albumDetail', weshot.albumDetail);
 router.get('/albumBrief', weshot.albumBrief);
@@ -19,6 +21,8 @@ router.delete('/album', weshot.albumDelete);
 router.delete('/history', weshot.historyDelete);
 router.get('/playlist', weshot.playlist);
 
+// vue edition
+router.post('/vue/login', vue)
 /**
  * Music-api
  */

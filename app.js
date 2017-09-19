@@ -2,7 +2,9 @@
 
 require('./globals');
 require('./setup-qcloud-sdk');
+var passport = require('passport');
 require('./models/db');
+require('./config/passport')
 const qiniu = require('qiniu');
 qiniu.conf.ACCESS_KEY = process.env.qiniu_AK;
 qiniu.conf.SECRET_KEY = process.env.qiniu_SK;
@@ -10,12 +12,14 @@ qiniu.conf.SECRET_KEY = process.env.qiniu_SK;
 const https = require('https');
 const http = require('http');
 const fs = require('fs');
+var path = require('path')
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const config = require('./config');
 const compression = require('compression');
 const cors = require('cors');
+
 
 const app = express();
 
@@ -26,6 +30,9 @@ app.set('strict routing', true);
 app.set('trust proxy', true);
 
 app.disable('x-powered-by');
+
+// vue version distribution
+app.use(express.static(path.join(__dirname + '/dir')))
 
 // music-api
 app.use(cors());
@@ -41,6 +48,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse `application/json`
 app.use(bodyParser.json());
+app.use(passport.initialize());
 
 app.use('/', require('./routes'));
 
