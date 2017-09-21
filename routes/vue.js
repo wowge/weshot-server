@@ -59,3 +59,30 @@ module.exports.login = function (req, res) {
     }
   })(req, res);
 }
+
+module.exports.user = function (req, res) {
+  if (req.query && req.query.id){
+    User
+      .findById(req.query.id)
+      .exec(function (err, user) {
+        if (!user){
+          res.status(404);
+          res.json({
+            'message': 'User not found!'
+          });
+          return;
+        }else if (err){
+          res.status(404);
+          res.json(err);
+          return;
+        }
+        res.status(200);
+        res.json(user);
+      });
+  }else {
+    res.status(404);
+    res.json({
+      'message': 'Usr id is required!'
+    });
+  }
+}
