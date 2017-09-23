@@ -29,7 +29,7 @@ router.get('/playlist', weshot.playlist);
 // vue edition
 router.post('/vue/login', vue.login);
 router.get('/vue/album', vue.album);
-router.get('/vue/user', auth, vue.user);
+router.get('/vue/user', vue.user);
 /**
  * Music-api
  */
