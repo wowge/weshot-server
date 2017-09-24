@@ -32,7 +32,7 @@ app.set('trust proxy', true);
 app.disable('x-powered-by');
 
 // vue version distribution
-app.use(express.static(path.join(__dirname + '/dir')))
+app.use(express.static(path.join(__dirname + '/dist')))
 
 // music-api
 app.use(cors());
