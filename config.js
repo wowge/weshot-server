@@ -2,5 +2,5 @@
 
 module.exports = {
     port: '80',
-    qiniuUrl: 'https://image.wowge.org/'
+    qiniuUrl: 'http://image.wowge.org/'
 };
