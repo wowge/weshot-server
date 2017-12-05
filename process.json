@@ -7,9 +7,9 @@
     "env": {
         "NODE_ENV": "production",
         "DEBUG_SDK": "yes",
-        "qiniu_AK": "YoeXKqJ9frWun3Nep7K8-i70AYutG2ZBtnDM-2hi",
-        "qiniu_SK": "OwHpSY2QDuLgRDK16NOgM7Hh4fSJXxAeU3C9V976",
-        "MONGOLAB_URI": "mongodb://admin:BBBBBBHcde0R1z@localhost:27017/weapp",
-        "JWT_SECRET": "OwHpSY2QDuLgRDK16NOgM7Hh4fSJXxAeU3C9V654"
+        "qiniu_AK": "",  //七牛云密钥
+        "qiniu_SK": "",  //七牛云密钥
+        "MONGOLAB_URI": "",  //Mongodb数据库地址
+        "JWT_SECRET": ""  //JWT密钥
     }
 }

@@ -2,5 +2,5 @@
 
 module.exports = {
     port: '80',
-    qiniuUrl: 'http://image.wowge.org/'
+    qiniuUrl: ''  //七牛云存储空间域名
 };

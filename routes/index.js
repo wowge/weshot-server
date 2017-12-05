@@ -17,7 +17,7 @@ router.get('/', require('./welcome'));
 router.get('/login', require('./login'));
 router.get('/user', require('./user'));
 
-// mini program edition
+// mini program
 router.post('/album/new', weshot.newAlbum);
 router.get('/albumDetail', weshot.albumDetail);
 router.get('/albumBrief', weshot.albumBrief);
@@ -26,7 +26,7 @@ router.delete('/album', weshot.albumDelete);
 router.delete('/history', weshot.historyDelete);
 router.get('/playlist', weshot.playlist);
 
-// vue edition
+// vue.js
 router.post('/vue/login', vue.login);
 router.get('/vue/album', vue.album);
 router.get('/vue/user', vue.user);
