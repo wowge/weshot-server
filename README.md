@@ -1,6 +1,6 @@
 # 似水流年小相册后端 - Node.js
 
-本项目是似水流年小相册的后端。需要和似水流年小相册小程序或网页端配合使用。
+本项目是似水流年小相册的后端。需要和[似水流年小相册小程序](https://github.com/wowge/weshot-weapp)或[网页端](https://github.com/wowge/weshot-vuejs)配合使用。
 
 ## 注意事项
 
